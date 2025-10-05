@@ -1,0 +1,53 @@
+╔═══════════════════════════════════════════════════════════════════╗
+║                   HOSTINGER DEPLOYMENT - READY                    ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Your React SPA is now fully configured for Hostinger deployment!
+
+┌─────────────────────────────────────────────────────────────────┐
+│ WHAT TO UPLOAD                                                  │
+└─────────────────────────────────────────────────────────────────┘
+
+Upload EVERYTHING inside the "dist/" folder to your public_html/:
+
+  ✓ .htaccess (enables React Router)
+  ✓ index.html
+  ✓ assets/ folder
+  ✓ fonts/ folder
+  ✓ All .mp4, .webm, .png, .jpg files
+
+┌─────────────────────────────────────────────────────────────────┐
+│ QUICK STEPS                                                     │
+└─────────────────────────────────────────────────────────────────┘
+
+1. Run:  npm run build
+
+2. Open Hostinger File Manager
+
+3. Delete everything in public_html/
+
+4. Upload all files from dist/ to public_html/
+
+5. Visit your domain - Done! ✨
+
+┌─────────────────────────────────────────────────────────────────┐
+│ NO BACKEND NEEDED                                               │
+└─────────────────────────────────────────────────────────────────┘
+
+  ✓ No database configuration
+  ✓ No environment variables
+  ✓ No server-side code
+  ✓ Pure static website
+  ✓ Works immediately after upload
+
+┌─────────────────────────────────────────────────────────────────┐
+│ FORM SUBMISSIONS                                                │
+└─────────────────────────────────────────────────────────────────┘
+
+The contact/inquiry forms currently log to browser console.
+To actually capture submissions, add:
+  - EmailJS (free, easy)
+  - Formspree (simple forms)
+  - Or re-enable Supabase
+
+See DEPLOYMENT.md for full details.
