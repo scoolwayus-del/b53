@@ -1,6 +1,6 @@
 export const socialLinks = {
   instagram: 'https://instagram.com/s111khar',
-  facebook: 'https://facebook.com/',
+  facebook: 'https://www.facebook.com/profile.php?id=61581449278227',
   linkedin: 'https://linkedin.com/company/'
 }
 
