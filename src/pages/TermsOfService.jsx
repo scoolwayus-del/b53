@@ -59,7 +59,7 @@ const TermsOfService = () => {
                 <li>Each project includes up to 2 revisions.</li>
                 <li>Revisions must stay within the original brief and references.</li>
                 <li>Additional revisions are chargeable. Depending on the editor effort.</li>
-                <li>If, after 2 revisions, the edit still does not align, Amoura Films may provide up to 30% credit, subject to review.</li>
+                <li>If, after 2 revisions, the edit still does not align, Amoura Works may provide up to 30% credit, subject to review.</li>
                 <li>Preference changes or new creative directions post-delivery are not covered.</li>
               </ul>
             </section>
