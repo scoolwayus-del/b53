@@ -92,7 +92,7 @@ const TermsOfService = () => {
                 <li>Approve drafts and revisions within 5 business days.</li>
                 <li>Provide first revision (if required) within 7 days of submitting the first draft and second revision (if need be) after submitting the second revision within 4 working days.</li>
                 <li>If there is need for a third revision it should be provided within 2 days of the second revision.</li>
-                <li>Ensure legal rights to all submitted footage. Amoura Films accepts no liability for copyright disputes.</li>
+                <li>Ensure legal rights to all submitted footage. Amoura Works accepts no liability for copyright disputes.</li>
               </ul>
             </section>
 
