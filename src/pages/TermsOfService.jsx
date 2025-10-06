@@ -19,7 +19,7 @@ const TermsOfService = () => {
             {/* Introduction */}
             <section className='space-y-3 sm:space-y-4'>
               <p className='font-[font1] text-responsive leading-relaxed text-layer-1'>
-                These Terms & Conditions ("Agreement") apply to all services provided by Amoura Films ("Service Provider") to the client ("Client"). By engaging our services, you agree to the following:
+                These Terms & Conditions ("Agreement") apply to all services provided by Amoura Works ("Service Provider") to the client ("Client"). By engaging our services, you agree to the following:
               </p>
             </section>
 
