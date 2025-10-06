@@ -201,7 +201,7 @@ const AffiliateProgram = () => {
                 Powered by AmouraWorks
               </h3>
               <p className='font-[font1] text-responsive text-layer-2 leading-relaxed mb-6 sm:mb-8 max-width-text mx-auto'>
-                Our affiliate program is managed by AmouraWorks, ensuring reliable payments, transparent tracking, and professional support.
+                Our affiliate program is managed by AmouraWorks i.e our dedicated Affiliate Team, ensuring reliable payments, transparent tracking, and professional support.
               </p>
               <div className='flex items-center justify-center space-x-3 sm:space-x-4'>
                 <img
