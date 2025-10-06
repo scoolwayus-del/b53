@@ -227,7 +227,7 @@ const AffiliateProgram = () => {
               </p>
               <div className='space-y-1 sm:space-y-2'>
                 <p className='font-[font1] text-responsive text-layer-1 break-all sm:break-normal'>
-                  <strong>Email:</strong> contact@amouraworks.com
+                  <strong>Email:</strong> affiliates@amouraworks.com
                 </p>
                 <p className='font-[font1] text-responsive text-layer-1'>
                   <strong>Response Time:</strong> Within 24 hours
