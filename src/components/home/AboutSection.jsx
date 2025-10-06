@@ -57,17 +57,7 @@ const AboutSection = () => {
       }
     )
 
-    // Image parallax scroll - smoother
-    gsap.to('.about-image-wrapper', {
-      yPercent: -8,
-      ease: "none",
-      scrollTrigger: {
-        trigger: '.story-card',
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: 0.5
-      }
-    })
+    // Image parallax scroll - removed for performance
 
     // Quote reveal - faster
     gsap.fromTo('.quote-reveal',
@@ -88,23 +78,18 @@ const AboutSection = () => {
       }
     )
 
-    // Values cards - faster staggered entrance
+    // Values cards - simplified entrance
     gsap.fromTo('.value-card',
       {
         opacity: 0,
-        y: 30,
-        scale: 0.95
+        y: 20
       },
       {
         opacity: 1,
         y: 0,
-        scale: 1,
-        duration: 0.6,
+        duration: 0.5,
         ease: "power2.out",
-        stagger: {
-          amount: 0.2,
-          from: "start"
-        },
+        stagger: 0.1,
         scrollTrigger: {
           trigger: '.values-grid',
           start: 'top 75%',
@@ -113,18 +98,18 @@ const AboutSection = () => {
       }
     )
 
-    // Icon animations - faster pop-in
+    // Icon animations - simplified
     gsap.fromTo('.value-icon',
       {
-        scale: 0,
-        rotation: -90
+        opacity: 0,
+        scale: 0.8
       },
       {
+        opacity: 1,
         scale: 1,
-        rotation: 0,
-        duration: 0.5,
-        ease: "back.out(1.5)",
-        stagger: 0.1,
+        duration: 0.4,
+        ease: "power2.out",
+        stagger: 0.05,
         scrollTrigger: {
           trigger: '.values-grid',
           start: 'top 70%',
@@ -219,10 +204,10 @@ const AboutSection = () => {
                     ref={imageRef}
                     src="/aboutus.jpeg"
                     alt="Our Team in Action"
-                    className='w-full h-full object-cover transition-all duration-500 scale-105 group-hover:scale-110'
-                    loading="eager"
-                    fetchPriority="high"
+                    className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-105'
+                    loading="lazy"
                     decoding="async"
+                    style={{ transform: 'translateZ(0)' }}
                   />
 
                   {/* Decorative corner accent */}
@@ -242,7 +227,7 @@ const AboutSection = () => {
               onMouseEnter={() => setHoveredCard(index)}
               onMouseLeave={() => setHoveredCard(null)}
             >
-              <div className='relative h-full p-8 sm:p-10 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/[0.07] to-white/[0.02] backdrop-blur-xl border border-white/10 overflow-hidden transition-all duration-500 hover:border-[#D3FD50]/30 hover:shadow-[0_20px_60px_-15px_rgba(211,253,80,0.2)] hover:-translate-y-2'>
+              <div className='relative h-full p-8 sm:p-10 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/[0.07] to-white/[0.02] backdrop-blur-xl border border-white/10 overflow-hidden transition-all duration-300 hover:border-[#D3FD50]/30 hover:shadow-[0_20px_60px_-15px_rgba(211,253,80,0.2)] hover:-translate-y-1' style={{ willChange: hoveredCard === index ? 'transform' : 'auto' }}>
                 {/* Animated gradient background */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${value.gradient} opacity-0 group-hover/card:opacity-100 transition-opacity duration-700`}></div>
 

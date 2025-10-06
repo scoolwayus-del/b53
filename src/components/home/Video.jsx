@@ -193,7 +193,7 @@ const Video = () => {
         autoPlay
         playsInline
         loop
-        preload="metadata"
+        preload={isMobile ? 'none' : 'metadata'}
         webkit-playsinline="true"
         x-webkit-airplay="allow"
         onError={(e) => {
@@ -206,6 +206,7 @@ const Video = () => {
           <source
             src="/video.webm"
             type="video/webm"
+            media="(min-width: 768px)"
           />
         )}
         

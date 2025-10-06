@@ -2206,17 +2206,40 @@ iframe {
     .gpu-accelerated {
         will-change: auto;
     }
-    
+
     /* Simplify shadows on mobile for better performance */
     .floating-panel-dark {
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
-    
+
     /* Reduce blur intensity on mobile */
     .floating-panel-dark {
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
     }
+
+    /* Disable expensive animations on mobile */
+    .animate-pulse,
+    .animate-glow-pulse {
+        animation: none !important;
+    }
+}
+
+/* Performance boost - hardware acceleration */
+.stat-card,
+.value-card,
+.story-card,
+.video-glass {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Reduce paint areas */
+.floating-panel-dark,
+.glass {
+    contain: layout style paint;
 }
 
 /* Enhanced Portfolio Section Styles */

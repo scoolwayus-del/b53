@@ -45,13 +45,13 @@ const StatsSection = () => {
 
   gsap.registerPlugin(ScrollTrigger)
 
-  const animateCounter = (element, finalNumber, duration = 2.5) => {
+  const animateCounter = (element, finalNumber, duration = 1.5) => {
     const counter = { value: 0 }
 
     gsap.to(counter, {
       value: finalNumber,
       duration: duration,
-      ease: "expo.out",
+      ease: "power2.out",
       onUpdate: () => {
         element.textContent = Math.floor(counter.value).toLocaleString()
       }
@@ -63,17 +63,13 @@ const StatsSection = () => {
       gsap.fromTo('.stats-title',
         {
           opacity: 0,
-          y: 60,
-          scale: 0.9,
-          rotateX: -15
+          y: 30
         },
         {
           opacity: 1,
           y: 0,
-          scale: 1,
-          rotateX: 0,
-          duration: 1.2,
-          ease: "power3.out",
+          duration: 0.6,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: '.stats-title',
             start: 'top 80%',
@@ -85,22 +81,14 @@ const StatsSection = () => {
       gsap.fromTo('.stat-card',
         {
           opacity: 0,
-          y: 80,
-          scale: 0.8,
-          rotateY: -10
+          y: 40
         },
         {
           opacity: 1,
           y: 0,
-          scale: 1,
-          rotateY: 0,
-          duration: 1,
-          ease: "back.out(1.4)",
-          stagger: {
-            amount: 0.4,
-            from: "start",
-            ease: "power2.inOut"
-          },
+          duration: 0.6,
+          ease: "power2.out",
+          stagger: 0.1,
           scrollTrigger: {
             trigger: '.stats-grid',
             start: 'top 75%',
@@ -109,10 +97,10 @@ const StatsSection = () => {
               if (!hasAnimated) {
                 setTimeout(() => {
                   document.querySelectorAll('.counter-number').forEach((counter, index) => {
-                    animateCounter(counter, statsData[index].number, 3)
+                    animateCounter(counter, statsData[index].number, 1.5)
                   })
                   setHasAnimated(true)
-                }, 600)
+                }, 300)
               }
             }
           }
@@ -129,9 +117,9 @@ const StatsSection = () => {
           {
             scaleX: 1,
             opacity: 1,
-            duration: 0.8,
+            duration: 0.5,
             ease: "power2.out",
-            delay: index * 0.1,
+            delay: index * 0.05,
             scrollTrigger: {
               trigger: line,
               start: 'top 85%',
@@ -174,7 +162,8 @@ const StatsSection = () => {
             return (
             <div
               key={index}
-              className='stat-card group relative text-center transition-transform duration-500 ease-out will-change-transform'
+              className='stat-card group relative text-center transition-transform duration-300 ease-out'
+              style={{ willChange: isHovered ? 'transform' : 'auto' }}
               onMouseEnter={() => setHoveredCard(index)}
               onMouseLeave={() => setHoveredCard(null)}
             >
@@ -197,7 +186,7 @@ const StatsSection = () => {
                 <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#D3FD50] to-transparent transition-opacity duration-300 rounded-t-[32px] ${isHovered ? 'opacity-100' : 'opacity-0'}`}></div>
 
                 <div className='relative z-10'>
-                  <div className='stat-icon text-4xl sm:text-5xl lg:text-6xl mb-6 sm:mb-8 inline-block transform transition-transform duration-300 group-hover:scale-110 will-change-transform'>
+                  <div className='stat-icon text-4xl sm:text-5xl lg:text-6xl mb-6 sm:mb-8 inline-block transform transition-transform duration-200 group-hover:scale-105'>
                     <span className={`
                       inline-block
                       bg-gradient-to-br ${stat.color}
