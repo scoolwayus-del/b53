@@ -37,7 +37,7 @@ const AffiliateProgram = () => {
     'Active social media presence or professional network',
     'Alignment with our brand values and quality standards',
     'Commitment to promoting our services authentically',
-    'Minimum of 1 referral every 6 months to maintain active status'
+    'Minimum of 3 referral every 6 months to maintain active status'
   ]
 
   const faqItems = [
