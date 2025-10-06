@@ -46,7 +46,7 @@ const TermsOfService = () => {
                 <li>Delivery timelines are confirmed in writing (email, WhatsApp, Slack, etc.).</li>
                 <li>"Delivery" means first draft submission, not final approval.</li>
                 <li>Delays caused by incomplete briefs, missing footage, or late feedback from the Client do not qualify.</li>
-                <li>If Amoura Films is more than 48 hours late without prior notice, the Client may be eligible for a 30% project credit.</li>
+                <li>If Amoura Works is more than 48 hours late without prior notice, the Client may be eligible for a 30% project credit.</li>
               </ul>
             </section>
 
