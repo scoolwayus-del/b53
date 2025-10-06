@@ -102,7 +102,7 @@ const TermsOfService = () => {
                 6. Technical & Operational Conditions
               </h2>
               <ul className='font-[font1] text-responsive leading-relaxed text-layer-1 space-y-2 sm:space-y-3 list-disc list-inside'>
-                <li>Amoura Films uses professional tools but is not responsible for disruptions caused by internet outages, power cuts, or software crashes.</li>
+                <li>Amoura Works uses professional tools but is not responsible for disruptions caused by internet outages, power cuts, or software crashes.</li>
                 <li>Deliverables are provided in MP4/MOV unless otherwise agreed.</li>
                 <li>Source project files if required (Premiere/FCP timelines) are provided only after complete payment.</li>
                 <li>Client files are stored for 20 days post-delivery (first draft) unless extended storage is purchased.</li>
