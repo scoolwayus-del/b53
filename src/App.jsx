@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import { Suspense, lazy, useEffect } from 'react'
 import LoadingFallback from './components/common/LoadingFallback'
 import gsap from 'gsap'
@@ -16,6 +16,8 @@ const TermsOfService = lazy(() => import('./pages/TermsOfService'))
 const AffiliateProgram = lazy(() => import('./pages/AffiliateProgram'))
 
 const App = () => {
+  const location = useLocation()
+
   useEffect(() => {
     // ✅ Refresh ScrollTrigger on load
     const handleLoad = () => {
@@ -33,6 +35,14 @@ const App = () => {
       cancelAnimationFrame(raf)
     }
   }, [])
+
+  // Global scroll-to-top on every route change
+  useEffect(() => {
+    // Instant scroll to top for all route changes
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+  }, [location.pathname])
 
   return (
     <div className='overflow-x-hidden'>

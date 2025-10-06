@@ -11,9 +11,15 @@ const PageWrapper = ({ children, className = '' }) => {
   const pageRef = useRef(null)
   const location = useLocation()
 
-  // Reset scroll position on route change
+  // Reset scroll position on route change - INSTANT scroll to top
   useEffect(() => {
-    window.scrollTo(0, 0)
+    // Instant scroll to top (no smooth behavior)
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+
+    // Force body scroll position for all browsers
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+
     // Force refresh ScrollTrigger whenever route changes
     setTimeout(() => ScrollTrigger.refresh(), 100)
   }, [location.pathname])
