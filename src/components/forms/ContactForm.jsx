@@ -424,7 +424,8 @@ const ContactForm = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className='w-full btn-pill btn-primary h-12 sm:h-14 lg:h-16 font-[font2] text-base sm:text-xl lg:text-2xl disabled:opacity-50 disabled:cursor-not-allowed'
+          className='w-full btn-pill btn-primary h-12 sm:h-14 lg:h-16 font-[font2] text-base sm:text-xl lg:text-2xl disabled:opacity-50 disabled:cursor-not-allowed select-none touch-manipulation active:scale-95 transition-transform duration-100'
+          style={{ cursor: 'pointer', touchAction: 'manipulation', WebkitTapHighlightColor: 'transparent' }}
         >
           <span className='pointer-events-none'>{isSubmitting ? 'Sending...' : 'Send Inquiry'}</span>
         </button>
