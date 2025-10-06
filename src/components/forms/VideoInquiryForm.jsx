@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { useSecureForm } from '../../hooks/useSecureForm'
+import { validateEmail, validatePhone, validateURL } from '../../security/inputSanitization'
 
 const VideoInquiryForm = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +19,16 @@ const VideoInquiryForm = () => {
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
+  const formRef = useRef(null)
+
+  const {
+    performSecurityChecks,
+    sanitizeData,
+    getCSRFToken,
+    addCSRFToForm,
+    isSecurityBlocked,
+    blockReason
+  } = useSecureForm('video-inquiry-form')
 
   const projectTypes = [
     'Teaser Film',
@@ -91,6 +103,12 @@ const VideoInquiryForm = () => {
     }
   }
 
+  useEffect(() => {
+    if (formRef.current) {
+      addCSRFToForm(formRef.current)
+    }
+  }, [])
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -102,17 +120,57 @@ const VideoInquiryForm = () => {
     setSubmitStatus(null)
 
     try {
+      const sanitizedData = sanitizeData(formData)
+
+      if (sanitizedData.email) {
+        const emailValidation = validateEmail(sanitizedData.email)
+        if (!emailValidation.valid) {
+          setErrors(prev => ({ ...prev, email: 'Invalid email format' }))
+          setIsSubmitting(false)
+          return
+        }
+      }
+
+      if (sanitizedData.phone) {
+        const phoneValidation = validatePhone(sanitizedData.phone)
+        if (!phoneValidation.valid) {
+          setErrors(prev => ({ ...prev, phone: 'Invalid phone format' }))
+          setIsSubmitting(false)
+          return
+        }
+      }
+
+      if (sanitizedData.sampleVideoLink) {
+        const urlValidation = validateURL(sanitizedData.sampleVideoLink)
+        if (!urlValidation.valid) {
+          setErrors(prev => ({ ...prev, sampleVideoLink: 'Invalid URL format' }))
+          setIsSubmitting(false)
+          return
+        }
+      }
+
+      const securityCheck = await performSecurityChecks(sanitizedData, 'video_inquiry_submit')
+
+      if (!securityCheck.passed) {
+        setSubmitStatus('error')
+        setIsSubmitting(false)
+        return
+      }
+
       const formDataToSend = new FormData()
 
-      Object.keys(formData).forEach(key => {
-        formDataToSend.append(key, formData[key])
+      Object.keys(sanitizedData).forEach(key => {
+        formDataToSend.append(key, sanitizedData[key])
       })
+
+      formDataToSend.append('_csrf', getCSRFToken())
 
       const response = await fetch('https://formspree.io/f/myznjawq', {
         method: 'POST',
         body: formDataToSend,
         headers: {
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'X-CSRF-Token': getCSRFToken()
         }
       })
 
@@ -155,12 +213,23 @@ const VideoInquiryForm = () => {
       {submitStatus === 'error' && (
         <div className='error-state mb-6 sm:mb-8'>
           <p className='font-[font2] text-base sm:text-lg'>
-            Sorry, there was an error sending your inquiry. Please try again or contact us directly.
+            {blockReason || 'Sorry, there was an error sending your inquiry. Please try again or contact us directly.'}
           </p>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className='space-y-5'>
+      {isSecurityBlocked && (
+        <div className='error-state mb-6 sm:mb-8'>
+          <p className='font-[font2] text-base sm:text-lg'>
+            {blockReason}
+          </p>
+        </div>
+      )}
+
+      <form ref={formRef} onSubmit={handleSubmit} className='space-y-5'>
+        <input type="text" name="website" className="honeypot-field" tabIndex="-1" autoComplete="off" />
+        <input type="url" name="company_url" className="honeypot-field" tabIndex="-1" autoComplete="off" />
+        <input type="email" name="email_confirm" className="honeypot-field" tabIndex="-1" autoComplete="off" />
         {/* Full Name & Email - Side by Side */}
         <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
           <div>

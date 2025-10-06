@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { Paperclip, Camera, X, Lightbulb } from 'lucide-react'
+import { useSecureForm } from '../../hooks/useSecureForm'
+import { validateEmail, validatePhone, validateURL, validateFileUpload } from '../../security/inputSanitization'
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -23,6 +25,16 @@ const ContactForm = () => {
   const [dragActive, setDragActive] = useState(false)
   const fileInputRef = useRef(null)
   const uploadSectionRef = useRef(null)
+  const formRef = useRef(null)
+
+  const {
+    performSecurityChecks,
+    sanitizeData,
+    getCSRFToken,
+    addCSRFToForm,
+    isSecurityBlocked,
+    blockReason
+  } = useSecureForm('contact-form')
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
@@ -40,6 +52,12 @@ const ContactForm = () => {
 
       const newUrl = window.location.pathname + window.location.hash
       window.history.replaceState({}, '', newUrl)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (formRef.current) {
+      addCSRFToForm(formRef.current)
     }
   }, [])
 
@@ -76,10 +94,10 @@ const ContactForm = () => {
   }
 
   const addFiles = (newFiles) => {
+    const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp', 'video/mp4', 'video/quicktime']
     const validFiles = newFiles.filter(file => {
-      const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp', 'video/mp4', 'video/quicktime']
-      const maxSize = 50 * 1024 * 1024
-      return validTypes.includes(file.type) && file.size <= maxSize
+      const validation = validateFileUpload(file, validTypes, 50 * 1024 * 1024)
+      return validation.valid
     })
 
     setFormData(prev => ({
@@ -101,23 +119,63 @@ const ContactForm = () => {
     setSubmitStatus(null)
 
     try {
+      const sanitizedData = sanitizeData(formData)
+
+      if (sanitizedData.email) {
+        const emailValidation = validateEmail(sanitizedData.email)
+        if (!emailValidation.valid) {
+          setSubmitStatus('error')
+          setIsSubmitting(false)
+          return
+        }
+      }
+
+      if (sanitizedData.phone) {
+        const phoneValidation = validatePhone(sanitizedData.phone)
+        if (!phoneValidation.valid) {
+          setSubmitStatus('error')
+          setIsSubmitting(false)
+          return
+        }
+      }
+
+      if (sanitizedData.videoLink) {
+        const urlValidation = validateURL(sanitizedData.videoLink)
+        if (!urlValidation.valid) {
+          setSubmitStatus('error')
+          setIsSubmitting(false)
+          return
+        }
+      }
+
+      const securityCheck = await performSecurityChecks(sanitizedData, 'contact_form_submit')
+
+      if (!securityCheck.passed) {
+        setSubmitStatus('error')
+        setIsSubmitting(false)
+        return
+      }
+
       const formDataToSend = new FormData()
 
-      Object.keys(formData).forEach(key => {
+      Object.keys(sanitizedData).forEach(key => {
         if (key !== 'files') {
-          formDataToSend.append(key, formData[key])
+          formDataToSend.append(key, sanitizedData[key])
         }
       })
 
-      formData.files.forEach((file, index) => {
+      sanitizedData.files.forEach((file, index) => {
         formDataToSend.append(`file${index}`, file)
       })
+
+      formDataToSend.append('_csrf', getCSRFToken())
 
       const response = await fetch('https://formspree.io/f/myznjawq', {
         method: 'POST',
         body: formDataToSend,
         headers: {
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'X-CSRF-Token': getCSRFToken()
         }
       })
 
@@ -166,12 +224,23 @@ const ContactForm = () => {
       {submitStatus === 'error' && (
         <div className='error-state mb-6 sm:mb-8'>
           <p className='font-[font2] text-base sm:text-lg'>
-            Sorry, there was an error sending your message. Please try again or contact us directly.
+            {blockReason || 'Sorry, there was an error sending your message. Please try again or contact us directly.'}
           </p>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className='space-y-6 sm:space-y-8'>
+      {isSecurityBlocked && (
+        <div className='error-state mb-6 sm:mb-8'>
+          <p className='font-[font2] text-base sm:text-lg'>
+            {blockReason}
+          </p>
+        </div>
+      )}
+
+      <form ref={formRef} onSubmit={handleSubmit} className='space-y-6 sm:space-y-8'>
+        <input type="text" name="website" className="honeypot-field" tabIndex="-1" autoComplete="off" />
+        <input type="url" name="company_url" className="honeypot-field" tabIndex="-1" autoComplete="off" />
+        <input type="email" name="email_confirm" className="honeypot-field" tabIndex="-1" autoComplete="off" />
         <div className='form-grid form-grid-2 gap-4 sm:gap-6'>
           <input 
             type="text" 

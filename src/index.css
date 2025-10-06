@@ -2363,8 +2363,19 @@ iframe {
     .font-fallback-1 {
         font-family: font1, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
-    
+
     .font-fallback-2 {
         font-family: font2, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
+}
+
+/* Security: Honeypot field styles */
+.honeypot-field {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    tab-index: -1 !important;
 }
