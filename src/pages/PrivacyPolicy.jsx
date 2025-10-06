@@ -19,7 +19,7 @@ const PrivacyPolicy = () => {
             {/* Introduction */}
             <section className='space-y-3 sm:space-y-4'>
               <p className='font-[font1] text-responsive leading-relaxed text-layer-1'>
-                At Amoura Films, we value and protect your privacy. This policy explains how we collect, use, and safeguard your data.
+                At Amoura Works, we value and protect your privacy. This policy explains how we collect, use, and safeguard your data.
               </p>
             </section>
 
