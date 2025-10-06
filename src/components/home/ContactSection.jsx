@@ -65,7 +65,7 @@ const ContactSection = () => {
   const socialLinks = [
     { name: 'Instagram', url: 'https://instagram.com/s111khar', icon: '/icons8-instagram-100.png' },
     { name: 'Facebook', url: 'https://https://www.facebook.com/profile.php?id=61581449278227', icon: '/icons8-facebook-100.png' },
-    { name: 'LinkedIn', url: 'https://linkedin.com/company/amouraworks', icon: '/icons8-linkedin-100.png' },
+    { name: 'LinkedIn', url: 'https://linkedin.com/company/amoura-works', icon: '/icons8-linkedin-100.png' },
   ];
 
   return (
