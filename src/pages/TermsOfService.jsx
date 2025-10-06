@@ -32,7 +32,7 @@ const TermsOfService = () => {
                 <li>All projects must be prepaid - 50% advance unless otherwise agreed in writing.</li>
                 <li>Prices are quoted per project in advance, any interim changes are billed separately. (Not including revisions)</li>
                 <li>Refunds, where approved, will never exceed the project fee.</li>
-                <li>Refunds may be substituted with credit for future services, at Amoura Films' discretion.</li>
+                <li>Refunds may be substituted with credit for future services, at Amoura Works' discretion.</li>
                 <li>Transaction charges, currency fees, and taxes are borne by the Client.</li>
               </ul>
             </section>
