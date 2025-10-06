@@ -71,7 +71,7 @@ const AffiliateProgram = () => {
             </h1>
             <div className='floating-panel-dark max-width-content mx-auto'>
               <p className='font-[font1] text-responsive leading-relaxed text-layer-2'>
-              Rejoignez notre programme d'affiliation et gagnez des commissions en recommandant nos services de vidéographie de mariage premium.
+              Join our affiliate program and earn commissions by recommending our premium wedding videography services.
               </p>
             </div>
           </div>
