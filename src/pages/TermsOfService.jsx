@@ -152,7 +152,7 @@ const TermsOfService = () => {
               <ul className='font-[font1] text-responsive leading-relaxed text-layer-1 space-y-2 sm:space-y-3 list-disc list-inside'>
                 <li>Amoura Works maximum liability is capped at the project fee paid.</li>
                 <li>We are not liable for indirect losses such as missed opportunities or reputational harm.</li>
-                <li>The Client indemnifies Amoura Films against third-party claims arising from client-provided materials.</li>
+                <li>The Client indemnifies Amoura Works against third-party claims arising from client-provided materials.</li>
               </ul>
             </section>
           </div>
