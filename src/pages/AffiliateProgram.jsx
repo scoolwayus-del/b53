@@ -198,7 +198,7 @@ const AffiliateProgram = () => {
           <section className='component-margin'>
             <div className='floating-panel-dark rounded-xl sm:rounded-2xl text-center mx-auto'>
               <h3 className='font-[font2] heading-responsive-lg uppercase text-[#D3FD50] mb-4 sm:mb-6 text-glow'>
-                Powered by AmouraWorks i.e our team
+                Powered by AmouraWorks
               </h3>
               <p className='font-[font1] text-responsive text-layer-2 leading-relaxed mb-6 sm:mb-8 max-width-text mx-auto'>
                 Our affiliate program is managed by AmouraWorks, ensuring reliable payments, transparent tracking, and professional support.
